@@ -1,16 +1,18 @@
 const http = require('http')
-const fs = require('fs')
+const fs = require('fs/promises')
 
 const host = 'localhost'
 const port = 8000
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
 	const dataToAppend = `${req.url}\t\t${new Date().toLocaleTimeString()}\n`
 
-	fs.appendFile('./requests.txt', dataToAppend, err => {
-		if (err) throw err
-		res.end('Data is appended correctly.')
-	})
+	try {
+		await fs.appendFile('./requests.txt', dataToAppend)
+	} catch (e) {
+		throw e
+	}
+	res.end('Data is appended')
 })
 
 server.listen(port, host, () => {
