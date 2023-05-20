@@ -5,7 +5,7 @@ const host = 'localhost'
 const port = 8000
 
 const server = http.createServer((req, res) => {
-	const dataToAppend = `${req.url}\t\t${new Date().toDateString()}\n`
+	const dataToAppend = `${req.url}\t\t${new Date().toLocaleTimeString()}\n`
 
 	fs.appendFile('./requests.txt', dataToAppend, err => {
 		if (err) throw err
