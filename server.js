@@ -7,7 +7,7 @@ const port = 8000
 const server = http.createServer((req, res) => {
 	const dataToAppend = `${req.url}\t\t${new Date().toDateString()}\n`
 
-	fs.appendFile('./log.txt', dataToAppend, err => {
+	fs.appendFile('./requests.txt', dataToAppend, err => {
 		if (err) throw err
 		res.end('Data is appended correctly.')
 	})
